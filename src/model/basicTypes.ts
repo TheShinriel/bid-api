@@ -5,31 +5,31 @@ type User = {
 
 type Product = {
 	id: number
-	imageUrls: string[]
+	ownerId: number
+	imageUrl: string
+	name: string
+	description: string
 }
 
 type Auction = {
+	id: number
 	sellerId: number
-	maxBid: number
 
-	product: Product
+	productId: Product
 	streamUrl: string
 
-	open: boolean
-	openAt: Date
+	openedAt: Date
+	closedAT: Date
 
 	bids: Bid[]
+	startPrice: number
 }
 
 type Bid = {
-	sellerId: number
+	id: number
+	bidderId: number
 	auctionId: number
 
 	price: number
 	when: Date
-}
-
-type Bidder = {
-	userId: number
-	auctionId: number
 }

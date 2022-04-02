@@ -1,0 +1,147 @@
+{
+    "resource_version": 16,
+    "metadata": {
+      "version": 3,
+      "sources": [
+        {
+          "name": "Heroku",
+          "kind": "postgres",
+          "tables": [
+            {
+              "table": {
+                "schema": "public",
+                "name": "Auction"
+              },
+              "object_relationships": [
+                {
+                  "name": "Product",
+                  "using": {
+                    "foreign_key_constraint_on": "productId"
+                  }
+                },
+                {
+                  "name": "User",
+                  "using": {
+                    "foreign_key_constraint_on": "SellerId"
+                  }
+                }
+              ],
+              "array_relationships": [
+                {
+                  "name": "Bids",
+                  "using": {
+                    "foreign_key_constraint_on": {
+                      "column": "auctionId",
+                      "table": {
+                        "schema": "public",
+                        "name": "Bid"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "table": {
+                "schema": "public",
+                "name": "Bid"
+              },
+              "object_relationships": [
+                {
+                  "name": "Auction",
+                  "using": {
+                    "foreign_key_constraint_on": "auctionId"
+                  }
+                },
+                {
+                  "name": "User",
+                  "using": {
+                    "foreign_key_constraint_on": "biderId"
+                  }
+                }
+              ]
+            },
+            {
+              "table": {
+                "schema": "public",
+                "name": "Product"
+              },
+              "object_relationships": [
+                {
+                  "name": "User",
+                  "using": {
+                    "foreign_key_constraint_on": "ownerId"
+                  }
+                }
+              ],
+              "array_relationships": [
+                {
+                  "name": "Auctions",
+                  "using": {
+                    "foreign_key_constraint_on": {
+                      "column": "productId",
+                      "table": {
+                        "schema": "public",
+                        "name": "Auction"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "table": {
+                "schema": "public",
+                "name": "User"
+              },
+              "array_relationships": [
+                {
+                  "name": "Auctions",
+                  "using": {
+                    "foreign_key_constraint_on": {
+                      "column": "SellerId",
+                      "table": {
+                        "schema": "public",
+                        "name": "Auction"
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "Bids",
+                  "using": {
+                    "foreign_key_constraint_on": {
+                      "column": "biderId",
+                      "table": {
+                        "schema": "public",
+                        "name": "Bid"
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "Products",
+                  "using": {
+                    "foreign_key_constraint_on": {
+                      "column": "ownerId",
+                      "table": {
+                        "schema": "public",
+                        "name": "Product"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "configuration": {
+            "connection_info": {
+              "use_prepared_statements": false,
+              "database_url": "postgres:/*****************************",
+              "isolation_level": "read-committed"
+            }
+          }
+        }
+      ]
+    }
+  }
