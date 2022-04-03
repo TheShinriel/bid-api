@@ -1,9 +1,9 @@
-type User = {
+export type User = {
 	id: number
 	pseudo: string
 }
 
-type Product = {
+export type Product = {
 	id: number
 	ownerId: number
 	imageUrl: string
@@ -11,7 +11,7 @@ type Product = {
 	description: string
 }
 
-type Auction = {
+export type Auction = {
 	id: number
 	sellerId: number
 
@@ -25,7 +25,7 @@ type Auction = {
 	startPrice: number
 }
 
-type Bid = {
+export type Bid = {
 	id: number
 	bidderId: number
 	auctionId: number

@@ -1,4 +1,4 @@
-type HasuraGraphQlError = {
+export type HasuraGraphQlError = {
 	message: string
 	extensions?: {
 		code: number
@@ -6,7 +6,7 @@ type HasuraGraphQlError = {
 	}
 }
 
-type HasuraGraphQlActionInput = {
+export type HasuraGraphQlActionInput = {
 	action: {
 		name: string
 	}
@@ -19,6 +19,6 @@ type HasuraGraphQlActionInput = {
 	request_query: string
 }
 
-type HasuraGraphQlActionOutput = {
+export type HasuraGraphQlActionOutput = {
 	[key: string]: any
 }
