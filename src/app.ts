@@ -1,29 +1,28 @@
 import express, { Request, Response } from 'express'
 
+import { handlers } from './handler'
+
 const app = express()
 
 app.get('/', (req: Request, res: Response) =>
 	res.send('Hello World from app.ts!')
 )
 
-// TODO: Open auction
-app.get('/openAuction', (req: Request, res: Response) => {
-	return res.json({
-		openedAt: new Date(),
-	})
-})
-
-// TODO: Close auction after 1minute
-app.get('/closeAuction', (req: Request, res: Response) => {
-	return res.json({
-		closedAt: new Date(),
-		// TODO: Check if there is a winner
-	})
-})
-
-// TODO: Validate bid, that is greather than last bid price
-app.get('/validateBid', (req: Request, res: Response) => {
-	return true
+app.post('/:route', async (req, res) => {
+	try {
+		const handler = handlers[req.params.route]
+		if (!handler) {
+			return res.status(404).json({
+				message: `not found`,
+			})
+		}
+		return await handler(req, res)
+	} catch (e) {
+		console.error(e)
+		return res.status(500).json({
+			message: `unexpected error occured`,
+		})
+	}
 })
 
 export default app
